@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Divine-Spark</title>
+    <title>Divine-Spark - AI Tools</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,12 +39,28 @@
         .cta-button:hover {
             background-color: #0056b3;
         }
-        .report {
-            margin: 20px 0;
-            padding: 15px;
+        .card-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .card {
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card h3 {
+            margin-top: 0;
+        }
+        .card a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .card a:hover {
+            text-decoration: underline;
         }
         footer {
             background-color: #333;
@@ -61,22 +77,21 @@
     <header>
         <h1>Divine-Spark</h1>
         <nav>
-            <a href="#">Home</a>
-            <a href="#">AI Tools</a>
+            <a href="#" id="home-link">Home</a>
+            <a href="#" id="ai-tools-link">AI Tools</a>
             <a href="#">Reports</a>
             <a href="#">About Us</a>
             <a href="#">Contact Us</a>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container" id="main-content">
         <h2>Welcome to Divine-Spark</h2>
         <p>Harness the power of AI to optimize and track time complexity.</p>
         <a href="#" class="cta-button">Get Started</a>
 
-        <div class="report">
-            <h3>Sample Report</h3>
-            <p><strong>Report Summary:</strong> This is a sample report demonstrating time complexity analysis.</p>
+        <div id="ai-tools-cards" class="card-container">
+            <!-- AI Tool Cards will be inserted here by JavaScript -->
         </div>
     </div>
 
@@ -85,9 +100,58 @@
     </footer>
 
     <script>
-        // JavaScript for basic interactivity (if needed)
-        document.querySelector('.cta-button').addEventListener('click', function() {
-            alert('Getting started...');
+        // AI Tools data
+        const aiTools = [
+            {
+                name: 'TensorFlow',
+                description: 'An open-source library for machine learning and artificial intelligence.',
+                link: 'https://www.tensorflow.org'
+            },
+            {
+                name: 'PyTorch',
+                description: 'An open-source machine learning library based on the Torch library.',
+                link: 'https://pytorch.org'
+            },
+            {
+                name: 'Scikit-Learn',
+                description: 'A Python module integrating a wide range of state-of-the-art machine learning algorithms.',
+                link: 'https://scikit-learn.org'
+            },
+            {
+                name: 'Keras',
+                description: 'An open-source software library that provides a Python interface for neural networks.',
+                link: 'https://keras.io'
+            },
+            {
+                name: 'OpenAI Gym',
+                description: 'A toolkit for developing and comparing reinforcement learning algorithms.',
+                link: 'https://gym.openai.com'
+            }
+        ];
+
+        // Function to display AI tools
+        function displayAITools() {
+            const container = document.getElementById('ai-tools-cards');
+            container.innerHTML = aiTools.map(tool => `
+                <div class="card">
+                    <h3>${tool.name}</h3>
+                    <p>${tool.description}</p>
+                    <a href="${tool.link}" target="_blank">Learn More</a>
+                </div>
+            `).join('');
+            container.style.display = 'grid'; // Show the AI tools section
+        }
+
+        // Event listeners for navigation
+        document.getElementById('ai-tools-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            displayAITools();
+        });
+
+        // Hide AI Tools on Home link click
+        document.getElementById('home-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('ai-tools-cards').style.display = 'none'; // Hide the AI tools section
         });
     </script>
 </body>
